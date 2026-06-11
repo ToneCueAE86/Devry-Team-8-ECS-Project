@@ -1,0 +1,22 @@
+
+    GB MANUFACTURING
+    EQUIPMENT CHECKOUT FORM
+    ------------------------------------------------------------
+    Employee: Michael Reyes (EMPC02)
+    Department: Maintenance Department
+    Status: Active
+
+    Pickup Date: 2026-06-11
+    Return Date: 2026-06-18
+
+    Equipment Borrowed:
+    - EQ009 Socket Set (Qty 1)
+- EQ014 Extension Cord 50ft (Qty 1)
+
+    ------------------------------------------------------------
+    Borrower Acknowledgment:
+    Employee agrees to all listed responsibilities.
+
+    Employee Signature: ____________________________
+    Clerk Signature:    ____________________________
+    
