@@ -1,0 +1,461 @@
+[
+  {
+    "first_name": "John",
+    "last_name": "Carter",
+    "employee_id": "EMPC01",
+    "job_title": "Carpenter",
+    "department": "Maintenance Department",
+    "status": "Active",
+
+    "phone": "555-1101",
+    "email": "john.carter@company.com",
+    "work_location": "Plant 1 – North Wing",
+
+    "supervisor_name": "Mark Thompson",
+    "supervisor_phone": "555-1001",
+    "supervisor_email": "mark.thompson@company.com",
+
+    "specializations": ["Carpentry", "Power Tool Operation"],
+    "certifications": [
+      { "name": "Basic Power Tools", "issued": "2023-01-15" }
+    ],
+    "notes": "DEMO: EXPIRED CERTIFICATION"
+  },
+
+  {
+    "first_name": "Michael",
+    "last_name": "Reyes",
+    "employee_id": "EMPC02",
+    "job_title": "Carpenter",
+    "department": "Maintenance Department",
+    "status": "Active",
+
+    "phone": "555-1102",
+    "email": "michael.reyes@company.com",
+    "work_location": "Plant 1 – South Wing",
+
+    "supervisor_name": "Mark Thompson",
+    "supervisor_phone": "555-1001",
+    "supervisor_email": "mark.thompson@company.com",
+
+    "specializations": ["Carpentry"],
+    "certifications": [],
+    "notes": "DEMO: NO CERTIFICATIONS"
+  },
+
+  {
+    "first_name": "Daniel",
+    "last_name": "Lopez",
+    "employee_id": "EMPC03",
+    "job_title": "Carpenter",
+    "department": "Maintenance Department",
+    "status": "Suspended",
+
+    "phone": "555-1103",
+    "email": "daniel.lopez@company.com",
+    "work_location": "Warehouse A",
+
+    "supervisor_name": "Mark Thompson",
+    "supervisor_phone": "555-1001",
+    "supervisor_email": "mark.thompson@company.com",
+
+    "specializations": ["Carpentry"],
+    "certifications": [
+      { "name": "Basic Power Tools", "issued": "2025-03-10" }
+    ],
+    "notes": "DEMO: SUSPENDED EMPLOYEE"
+  },
+
+  {
+    "first_name": "Robert",
+    "last_name": "Young",
+    "employee_id": "EMPC04",
+    "job_title": "Carpenter",
+    "department": "Maintenance Department",
+    "status": "Terminated",
+
+    "phone": "555-1104",
+    "email": "robert.young@company.com",
+    "work_location": "Maintenance Shop",
+
+    "supervisor_name": "Mark Thompson",
+    "supervisor_phone": "555-1001",
+    "supervisor_email": "mark.thompson@company.com",
+
+    "specializations": ["Carpentry"],
+    "certifications": [
+      { "name": "Basic Power Tools", "issued": "2024-11-20" }
+    ],
+    "notes": "DEMO: TERMINATED EMPLOYEE"
+  },
+
+  {
+    "first_name": "Eric",
+    "last_name": "Santos",
+    "employee_id": "EMPE01",
+    "job_title": "Electrician",
+    "department": "Electrical Department",
+    "status": "Active",
+
+    "phone": "555-2101",
+    "email": "eric.santos@company.com",
+    "work_location": "Plant 2 – East Wing",
+
+    "supervisor_name": "Linda Perez",
+    "supervisor_phone": "555-2001",
+    "supervisor_email": "linda.perez@company.com",
+
+    "specializations": ["Electrical Systems", "LOTO Procedures"],
+    "certifications": [
+      { "name": "Electrical Safety", "issued": "2023-09-01" },
+      { "name": "LOTO", "issued": "2025-02-10" }
+    ],
+    "notes": "DEMO: MIXED CERTIFICATIONS (VALID + EXPIRED)"
+  },
+
+  {
+    "first_name": "Anthony",
+    "last_name": "Kim",
+    "employee_id": "EMPE02",
+    "job_title": "Electrician",
+    "department": "Electrical Department",
+    "status": "Active",
+
+    "phone": "555-2102",
+    "email": "anthony.kim@company.com",
+    "work_location": "Electrical Shop",
+
+    "supervisor_name": "Linda Perez",
+    "supervisor_phone": "555-2001",
+    "supervisor_email": "linda.perez@company.com",
+
+    "specializations": ["Electrical Safety"],
+    "certifications": [
+      { "name": "Electrical Safety", "issued": "2025-05-01" }
+    ],
+    "notes": "DEMO: FULLY VALID CERTIFICATIONS"
+  },
+
+  {
+    "first_name": "Steven",
+    "last_name": "Park",
+    "employee_id": "EMPE03",
+    "job_title": "Electrician",
+    "department": "Electrical Department",
+    "status": "Active",
+
+    "phone": "555-2103",
+    "email": "steven.park@company.com",
+    "work_location": "Plant 2 – West Wing",
+
+    "supervisor_name": "Linda Perez",
+    "supervisor_phone": "555-2001",
+    "supervisor_email": "linda.perez@company.com",
+
+    "specializations": ["Electrical Safety"],
+    "certifications": [
+      { "name": "Electrical Safety", "issued": "2024-08-15" }
+    ],
+    "notes": ""
+  },
+
+  {
+    "first_name": "Brian",
+    "last_name": "Nguyen",
+    "employee_id": "EMPE04",
+    "job_title": "Electrician",
+    "department": "Electrical Department",
+    "status": "Active",
+
+    "phone": "555-2104",
+    "email": "brian.nguyen@company.com",
+    "work_location": "Warehouse B",
+
+    "supervisor_name": "Linda Perez",
+    "supervisor_phone": "555-2001",
+    "supervisor_email": "linda.perez@company.com",
+
+    "specializations": ["LOTO Procedures"],
+    "certifications": [
+      { "name": "Electrical Safety", "issued": "2024-10-10" },
+      { "name": "LOTO", "issued": "2025-01-20" }
+    ],
+    "notes": ""
+  },
+
+  {
+    "first_name": "Henry",
+    "last_name": "Cole",
+    "employee_id": "EMPH01",
+    "job_title": "HVAC Technician",
+    "department": "HVAC Department",
+    "status": "Restricted",
+
+    "phone": "555-3101",
+    "email": "henry.cole@company.com",
+    "work_location": "HVAC Shop",
+
+    "supervisor_name": "Charles Bennett",
+    "supervisor_phone": "555-3001",
+    "supervisor_email": "charles.bennett@company.com",
+
+    "specializations": ["HVAC Systems"],
+    "certifications": [
+      { "name": "HVAC Certification", "issued": "2025-04-15" }
+    ],
+    "notes": "DEMO: RESTRICTED EMPLOYEE"
+  },
+
+  {
+    "first_name": "Samuel",
+    "last_name": "Baker",
+    "employee_id": "EMPH02",
+    "job_title": "HVAC Technician",
+    "department": "HVAC Department",
+    "status": "Active",
+
+    "phone": "555-3102",
+    "email": "samuel.baker@company.com",
+    "work_location": "Plant 1 – North Wing",
+
+    "supervisor_name": "Charles Bennett",
+    "supervisor_phone": "555-3001",
+    "supervisor_email": "charles.bennett@company.com",
+
+    "specializations": ["HVAC Systems"],
+    "certifications": [
+      { "name": "HVAC Certification", "issued": "2024-12-01" }
+    ],
+    "notes": ""
+  },
+
+  {
+    "first_name": "Victor",
+    "last_name": "Allen",
+    "employee_id": "EMPH03",
+    "job_title": "HVAC Technician",
+    "department": "HVAC Department",
+    "status": "Active",
+
+    "phone": "555-3103",
+    "email": "victor.allen@company.com",
+    "work_location": "Plant 1 – South Wing",
+
+    "supervisor_name": "Charles Bennett",
+    "supervisor_phone": "555-3001",
+    "supervisor_email": "charles.bennett@company.com",
+
+    "specializations": ["HVAC Systems"],
+    "certifications": [
+      { "name": "HVAC Certification", "issued": "2024-11-10" }
+    ],
+    "notes": ""
+  },
+
+  {
+    "first_name": "George",
+    "last_name": "Diaz",
+    "employee_id": "EMPH04",
+    "job_title": "HVAC Technician",
+    "department": "HVAC Department",
+    "status": "Active",
+
+    "phone": "555-3104",
+    "email": "george.diaz@company.com",
+    "work_location": "Plant 2 – East Wing",
+
+    "supervisor_name": "Charles Bennett",
+    "supervisor_phone": "555-3001",
+    "supervisor_email": "charles.bennett@company.com",
+
+    "specializations": ["HVAC Systems"],
+    "certifications": [
+      { "name": "HVAC Certification", "issued": "2024-09-20" }
+    ],
+    "notes": ""
+  },
+
+  {
+    "first_name": "Marcus",
+    "last_name": "Hill",
+    "employee_id": "EMPM01",
+    "job_title": "Mechanic",
+    "department": "Mechanical Department",
+    "status": "Active",
+
+    "phone": "555-4101",
+    "email": "marcus.hill@company.com",
+    "work_location": "Mechanical Shop",
+
+    "supervisor_name": "Sarah Mitchell",
+    "supervisor_phone": "555-4001",
+    "supervisor_email": "sarah.mitchell@company.com",
+
+    "specializations": ["Machinery Operation"],
+    "certifications": [
+      { "name": "Machinery Operation", "issued": "2025-02-01" }
+    ],
+    "notes": ""
+  },
+
+  {
+    "first_name": "Kevin",
+    "last_name": "Brooks",
+    "employee_id": "EMPM02",
+    "job_title": "Mechanic",
+    "department": "Mechanical Department",
+    "status": "Active",
+
+    "phone": "555-4102",
+    "email": "kevin.brooks@company.com",
+    "work_location": "Plant 2 – West Wing",
+
+    "supervisor_name": "Sarah Mitchell",
+    "supervisor_phone": "555-4001",
+    "supervisor_email": "sarah.mitchell@company.com",
+
+    "specializations": ["Machinery Operation"],
+    "certifications": [
+      { "name": "Machinery Operation", "issued": "2024-10-05" }
+    ],
+    "notes": ""
+  },
+
+  {
+    "first_name": "Justin",
+    "last_name": "Ward",
+    "employee_id": "EMPM03",
+    "job_title": "Mechanic",
+    "department": "Mechanical Department",
+    "status": "Active",
+
+    "phone": "555-4103",
+    "email": "justin.ward@company.com",
+    "work_location": "Warehouse A",
+
+    "supervisor_name": "Sarah Mitchell",
+    "supervisor_phone": "555-4001",
+    "supervisor_email": "sarah.mitchell@company.com",
+
+    "specializations": ["Machinery Operation"],
+    "certifications": [
+      { "name": "Machinery Operation", "issued": "2024-12-12" }
+    ],
+    "notes": ""
+  },
+
+  {
+    "first_name": "Shawn",
+    "last_name": "Foster",
+    "employee_id": "EMPM04",
+    "job_title": "Mechanic",
+    "department": "Mechanical Department",
+    "status": "Active",
+
+    "phone": "555-4104",
+    "email": "shawn.foster@company.com",
+    "work_location": "Plant 1 – North Wing",
+
+    "supervisor_name": "Sarah Mitchell",
+    "supervisor_phone": "555-4001",
+    "supervisor_email": "sarah.mitchell@company.com",
+
+    "specializations": ["Machinery Operation"],
+    "certifications": [
+      { "name": "Machinery Operation", "issued": "2024-11-01" }
+    ],
+    "notes": ""
+  },
+
+  {
+    "first_name": "Alex",
+    "last_name": "Morgan",
+    "employee_id": "EMPS01",
+    "job_title": "Safety Technician",
+    "department": "Safety Department",
+    "status": "Inactive",
+
+    "phone": "555-5101",
+    "email": "alex.morgan@company.com",
+    "work_location": "Safety Office",
+
+    "supervisor_name": "John Matthews",
+    "supervisor_phone": "555-5001",
+    "supervisor_email": "john.matthews@company.com",
+
+    "specializations": ["PPE Training"],
+    "certifications": [
+      { "name": "PPE Training", "issued": "2025-06-01" }
+    ],
+    "notes": "DEMO: INACTIVE EMPLOYEE"
+  },
+
+  {
+    "first_name": "Ethan",
+    "last_name": "Price",
+    "employee_id": "EMPS02",
+    "job_title": "Safety Technician",
+    "department": "Safety Department",
+    "status": "Active",
+
+    "phone": "555-5102",
+    "email": "ethan.price@company.com",
+    "work_location": "Plant 2 – East Wing",
+
+    "supervisor_name": "John Matthews",
+    "supervisor_phone": "555-5001",
+    "supervisor_email": "john.matthews@company.com",
+
+    "specializations": ["PPE Training"],
+    "certifications": [
+      { "name": "PPE Training", "issued": "2024-11-15" }
+    ],
+    "notes": ""
+  },
+
+  {
+    "first_name": "Logan",
+    "last_name": "Howard",
+    "employee_id": "EMPS03",
+    "job_title": "Safety Technician",
+    "department": "Safety Department",
+    "status": "Active",
+
+    "phone": "555-5103",
+    "email": "logan.howard@company.com",
+    "work_location": "Plant 1 – South Wing",
+
+    "supervisor_name": "John Matthews",
+    "supervisor_phone": "555-5001",
+    "supervisor_email": "john.matthews@company.com",
+
+    "specializations": ["PPE Training"],
+    "certifications": [
+      { "name": "PPE Training", "issued": "2024-10-10" }
+    ],
+    "notes": ""
+  },
+
+  {
+    "first_name": "Owen",
+    "last_name": "Gray",
+    "employee_id": "EMPS04",
+    "job_title": "Safety Technician",
+    "department": "Safety Department",
+    "status": "Active",
+
+    "phone": "555-5104",
+    "email": "owen.gray@company.com",
+    "work_location": "Warehouse B",
+
+    "supervisor_name": "John Matthews",
+    "supervisor_phone": "555-5001",
+    "supervisor_email": "john.matthews@company.com",
+
+    "specializations": ["PPE Training"],
+    "certifications": [
+      { "name": "PPE Training", "issued": "2024-09-20" }
+    ],
+    "notes": ""
+  }
+]

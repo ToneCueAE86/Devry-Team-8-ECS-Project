@@ -1,0 +1,13 @@
+GB MANUFACTURING - EQUIPMENT CHECKOUT RECEIPT
+------------------------------------------------------------
+
+Employee: George Diaz
+Employee ID: EMPH04
+Department: HVAC Department
+Supervisor: Charles Bennett
+
+Equipment Borrowed:
+- EQ007 | Pipe Wrench | Qty: 1 | Notes: 
+
+Acknowledgment:
+Employee agrees to return equipment on time and in good condition.

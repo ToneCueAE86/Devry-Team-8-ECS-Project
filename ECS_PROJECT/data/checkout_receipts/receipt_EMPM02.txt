@@ -1,0 +1,13 @@
+GB MANUFACTURING - EQUIPMENT CHECKOUT RECEIPT
+------------------------------------------------------------
+
+Employee: Kevin Brooks
+Employee ID: EMPM02
+Department: Mechanical Department
+Supervisor: Sarah Mitchell
+
+Equipment Borrowed:
+- EQ015 | LED Work Light | Qty: 3 | Notes: 
+
+Acknowledgment:
+Employee agrees to return equipment on time and in good condition.

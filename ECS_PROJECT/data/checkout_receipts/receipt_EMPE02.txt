@@ -1,0 +1,13 @@
+GB MANUFACTURING - EQUIPMENT CHECKOUT RECEIPT
+------------------------------------------------------------
+
+Employee: Anthony Kim
+Employee ID: EMPE02
+Department: Electrical Department
+Supervisor: Linda Perez
+
+Equipment Borrowed:
+- EQ008 | Adjustable Wrench | Qty: 1 | Notes: 
+
+Acknowledgment:
+Employee agrees to return equipment on time and in good condition.
