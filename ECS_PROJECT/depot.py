@@ -253,96 +253,110 @@ class EmployeeProfileWindow:
 
         tk.Label(center,
                  text="EMPLOYEE PROFILE",
-                 font=("Arial", 28, "bold"),
+                 font=("Arial", 15, "bold"),
                  bg=BG, fg=FG).pack(pady=10)
 
-        photo_box = tk.Frame(center, width=200, height=220,
+        # ---------------- PHOTO BOX ----------------
+        photo_box = tk.Frame(center, width=150, height=150,
                              bg="white", highlightbackground="black",
                              highlightthickness=2)
         photo_box.pack(pady=5)
         tk.Label(photo_box,
                  text="PHOTO",
-                 font=("Arial", 16, "bold"),
+                 font=("Arial", 10, "bold"),
                  bg="white").place(relx=0.5, rely=0.5, anchor="center")
 
-        content = tk.Frame(center, bg=BG)
-        content.pack(pady=15)
+        # ---------------- 3-COLUMN SECTION ----------------
+        columns = tk.Frame(center, bg=BG)
+        columns.pack(pady=10, fill="x")
 
-        def section_title(text):
-            tk.Label(content,
-                     text=text,
-                     font=("Arial", 18, "bold"),
-                     bg=BG, fg=FG).pack(anchor="w", pady=(10, 0))
-            tk.Frame(content, bg=FG, height=1).pack(fill="x", pady=(2, 5))
+        col1 = tk.Frame(columns, bg=BG)
+        col2 = tk.Frame(columns, bg=BG)
+        col3 = tk.Frame(columns, bg=BG)
 
-        def add_row(label, value):
-            row = tk.Frame(content, bg=BG)
+        col1.pack(side="left", expand=True, fill="both", padx=10)
+        col2.pack(side="left", expand=True, fill="both", padx=10)
+        col3.pack(side="left", expand=True, fill="both", padx=10)
+
+        # Helper function for rows
+        def add_row(parent, label, value):
+            row = tk.Frame(parent, bg=BG)
             row.pack(anchor="w", pady=1)
             tk.Label(row, text=f"{label}:",
-                     font=("Arial", 16, "bold"),
+                     font=("Arial", 12, "bold"),
                      bg=BG, fg=FG).pack(side="left")
-            tk.Label(row, text=f"  {value}",
-                     font=("Arial", 16),
+            tk.Label(row, text=f" {value}",
+                     font=("Arial", 12),
                      bg=BG, fg=FG).pack(side="left")
 
-        section_title("Identity Information")
-        add_row("First Name", data["first_name"])
-        add_row("Last Name", data["last_name"])
-        add_row("Employee ID", data["employee_id"])
-        add_row("Job Title", data["job_title"])
-        add_row("Department", data["department"])
-        add_row("Status", data["status"])
+        # ---------------- COLUMN 1: IDENTITY ----------------
+        tk.Label(col1, text="Identity Information",
+                 font=("Arial", 14, "bold"), bg=BG).pack(anchor="w")
+        add_row(col1, "First Name", data["first_name"])
+        add_row(col1, "Last Name", data["last_name"])
+        add_row(col1, "Employee ID", data["employee_id"])
+        add_row(col1, "Job Title", data["job_title"])
+        add_row(col1, "Department", data["department"])
+        add_row(col1, "Status", data["status"])
 
-        section_title("Contact Information")
-        add_row("Phone Number", data["phone"])
-        add_row("Email Address", data["email"])
-        add_row("Work Location", data["work_location"])
+        # ---------------- COLUMN 2: CONTACT ----------------
+        tk.Label(col2, text="Contact Information",
+                 font=("Arial", 14, "bold"), bg=BG).pack(anchor="w")
+        add_row(col2, "Phone Number", data["phone"])
+        add_row(col2, "Email Address", data["email"])
+        add_row(col2, "Work Location", data["work_location"])
 
-        section_title("Supervisor Information")
-        add_row("Supervisor Name", data["supervisor_name"])
-        add_row("Supervisor Phone", data["supervisor_phone"])
-        add_row("Supervisor Email", data["supervisor_email"])
+        # ---------------- COLUMN 3: QUALIFICATIONS ----------------
+        tk.Label(col3, text="Qualifications",
+                 font=("Arial", 14, "bold"), bg=BG).pack(anchor="w")
 
-        section_title("Qualifications")
-        tk.Label(content,
-                 text="Specializations:",
-                 font=("Arial", 16, "bold"),
-                 bg=BG, fg=FG).pack(anchor="w")
+        tk.Label(col3, text="Specializations:",
+                 font=("Arial", 12, "bold"), bg=BG).pack(anchor="w")
         for spec in data["specializations"]:
-            tk.Label(content,
-                     text=f"  • {spec}",
-                     font=("Arial", 16),
-                     bg=BG, fg=FG).pack(anchor="w")
+            tk.Label(col3, text=f"• {spec}",
+                     font=("Arial", 12), bg=BG).pack(anchor="w")
 
-        tk.Label(content,
-                 text="Certifications:",
-                 font=("Arial", 16, "bold"),
-                 bg=BG, fg=FG).pack(anchor="w", pady=(10, 0))
+        tk.Label(col3, text="Certifications:",
+                 font=("Arial", 12, "bold"), bg=BG).pack(anchor="w", pady=(10, 0))
         for cert in data["certifications"]:
-            tk.Label(content,
-                     text=f"  • {cert['name']} — Issued: {cert['issued']}",
-                     font=("Arial", 16),
-                     bg=BG, fg=FG).pack(anchor="w")
+            tk.Label(col3,
+                     text=f"• {cert['name']} — Issued: {cert['issued']}",
+                     font=("Arial", 12), bg=BG).pack(anchor="w")
 
-        section_title("Notes")
-        tk.Label(content,
+        # ---------------- SUPERVISOR INFO (FULL WIDTH) ----------------
+        sup_frame = tk.Frame(center, bg=BG)
+        sup_frame.pack(pady=10, fill="x")
+
+        tk.Label(sup_frame, text="Supervisor Information",
+                 font=("Arial", 14, "bold"), bg=BG).pack(anchor="w")
+        add_row(sup_frame, "Supervisor Name", data["supervisor_name"])
+        add_row(sup_frame, "Supervisor Phone", data["supervisor_phone"])
+        add_row(sup_frame, "Supervisor Email", data["supervisor_email"])
+
+        # ---------------- NOTES (FULL WIDTH) ----------------
+        notes_frame = tk.Frame(center, bg=BG)
+        notes_frame.pack(pady=10, fill="x")
+
+        tk.Label(notes_frame, text="Notes",
+                 font=("Arial", 14, "bold"), bg=BG).pack(anchor="w")
+        tk.Label(notes_frame,
                  text=data["notes"] if data["notes"] else "(No notes on file)",
-                 font=("Arial", 16),
-                 bg=BG, fg=FG).pack(anchor="w", pady=2)
+                 font=("Arial", 12), bg=BG).pack(anchor="w")
 
+        # ---------------- BUTTONS ----------------
         btn_frame = tk.Frame(center, bg=BG)
-        btn_frame.pack(pady=25)
+        btn_frame.pack(pady=20)
 
         tk.Button(btn_frame,
                   text="Proceed to Checkout",
-                  font=("Arial", 16),
-                  width=30,
+                  font=("Arial", 14),
+                  width=25,
                   bg=BTN_BG, fg=FG,
                   command=self.proceed).grid(row=0, column=0, padx=10)
 
         tk.Button(btn_frame,
                   text="Cancel",
-                  font=("Arial", 16),
+                  font=("Arial", 14),
                   width=12,
                   bg=BTN_BG, fg=FG,
                   command=self.cancel).grid(row=0, column=1, padx=10)
@@ -356,6 +370,7 @@ class EmployeeProfileWindow:
         for widget in self.root.winfo_children():
             widget.destroy()
         DepotMenu(self.root)
+
 
 
 # ---------------------------------------------------------
@@ -1056,64 +1071,86 @@ class CheckoutFormWindow:
 # ---------------------------------------------------------
 class FinalConfirmationWindow:
     def __init__(self, root, employee, checkout_items):
+        # Store references
         self.root = root
         self.employee = employee
         self.items = checkout_items
         self.root.configure(bg=BG)
 
+        # Main container (TOP)
         main = tk.Frame(root, bg=BG)
-        main.place(relx=0.5, rely=0.02, anchor="n")
+        main.pack(pady=5)
 
+        # Header
         build_header(main)
 
+        # Title
         tk.Label(main,
                  text="EQUIPMENT CHECKOUT RECEIPT",
-                 font=("Arial", 26, "bold"),
-                 bg=BG, fg=FG).pack(pady=10)
+                 font=("Arial", 20, "bold"),
+                 bg=BG, fg=FG).pack(pady=5)
 
-        # ---------------- EMPLOYEE INFO ----------------
+        # ============================================================
+        # EMPLOYEE + SUPERVISOR INFO (2 COLUMNS)
+        # ============================================================
         info = tk.Frame(main, bg=BG)
-        info.pack(pady=5, fill="x")
+        info.pack(fill="x", pady=5)
 
-        tk.Label(info, text="Employee Information",
-                 font=("Arial", 18, "bold"),
-                 bg=BG, fg=FG).pack(anchor="w")
+        left = tk.Frame(info, bg=BG)
+        right = tk.Frame(info, bg=BG)
 
+        left.pack(side="left", expand=True, fill="both", padx=10)
+        right.pack(side="left", expand=True, fill="both", padx=10)
+
+        # Section titles
+        tk.Label(left, text="Employee Information",
+                 font=("Arial", 14, "bold"), bg=BG).pack(anchor="w")
+        tk.Label(right, text="Supervisor Information",
+                 font=("Arial", 14, "bold"), bg=BG).pack(anchor="w")
+
+        # Helper row function
         def row(parent, label, value):
             r = tk.Frame(parent, bg=BG)
             r.pack(anchor="w")
             tk.Label(r, text=f"{label}: ",
-                     font=("Arial", 14, "bold"), bg=BG).pack(side="left")
+                     font=("Arial", 12, "bold"), bg=BG).pack(side="left")
             tk.Label(r, text=value,
-                     font=("Arial", 14), bg=BG).pack(side="left")
+                     font=("Arial", 12), bg=BG).pack(side="left")
 
-        row(info, "Name", f"{employee['first_name']} {employee['last_name']}")
-        row(info, "Employee ID", employee["employee_id"])
-        row(info, "Department", employee["department"])
-        row(info, "Supervisor", employee["supervisor_name"])
-        row(info, "Phone", employee["phone"])
-        row(info, "Email", employee["email"])
+        # LEFT COLUMN — EMPLOYEE INFO
+        row(left, "Name", f"{employee['first_name']} {employee['last_name']}")
+        row(left, "Employee ID", employee["employee_id"])
+        row(left, "Department", employee["department"])
+        row(left, "Phone", employee["phone"])
+        row(left, "Email", employee["email"])
 
-        # ---------------- EQUIPMENT TABLE ----------------
+        # RIGHT COLUMN — SUPERVISOR INFO
+        row(right, "Supervisor", employee["supervisor_name"])
+        row(right, "Sup. Phone", employee["supervisor_phone"])
+        row(right, "Sup. Email", employee["supervisor_email"])
+
+        # ============================================================
+        # EQUIPMENT TABLE
+        # ============================================================
         table_frame = tk.Frame(main, bg=BG)
-        table_frame.pack(pady=10)
+        table_frame.pack(pady=5)
 
         tk.Label(table_frame, text="Equipment Borrowed",
-                 font=("Arial", 18, "bold"), bg=BG).pack(anchor="w")
+                 font=("Arial", 14, "bold"), bg=BG).pack(anchor="w")
 
         tree = ttk.Treeview(table_frame,
                             columns=("id", "name", "qty", "notes"),
                             show="headings",
-                            height=8)
+                            height=5)
         tree.heading("id", text="ID")
         tree.heading("name", text="Description")
         tree.heading("qty", text="Qty")
         tree.heading("notes", text="Notes")
 
-        tree.column("id", width=80, anchor="center")
-        tree.column("name", width=240, anchor="w")
-        tree.column("qty", width=60, anchor="center")
-        tree.column("notes", width=260, anchor="w")
+        tree.column("id", width=70, anchor="center")
+        tree.column("name", width=200, anchor="w")
+        tree.column("qty", width=50, anchor="center")
+        tree.column("notes", width=200, anchor="w")
 
         tree.pack()
 
@@ -1121,9 +1158,11 @@ class FinalConfirmationWindow:
             tree.insert("", "end",
                         values=(item["id"], item["name"], item["qty"], item["notes"]))
 
-        # Pickup / Return Dates
+        # ============================================================
+        # PICKUP / RETURN DATES
+        # ============================================================
         dates_frame = tk.Frame(main, bg=BG)
-        dates_frame.pack(pady=10, anchor="w")
+        dates_frame.pack(pady=5, anchor="w")
 
         pickup = checkout_items[0]["pickup"] if checkout_items else ""
         ret = checkout_items[0]["return"] if checkout_items else ""
@@ -1132,51 +1171,59 @@ class FinalConfirmationWindow:
         row(dates_frame, "Return Date", ret)
         row(dates_frame, "Total Items", str(sum(i["qty"] for i in checkout_items)))
 
-        # ---------------- ACKNOWLEDGMENT ----------------
+        # ============================================================
+        # ACKNOWLEDGMENT (COMPACT VERSION)
+        # ============================================================
         ack_frame = tk.Frame(main, bg=BG)
-        ack_frame.pack(pady=10, fill="x")
+        ack_frame.pack(pady=5, fill="x")
 
         tk.Label(ack_frame, text="Borrower Acknowledgment",
-                 font=("Arial", 18, "bold"), bg=BG).pack(anchor="w")
+                 font=("Arial", 14, "bold"), bg=BG).pack(anchor="w")
 
         ack_text = (
-            "By signing below, the employee acknowledges and agrees to the following:\n\n"
-            "• All equipment listed above is borrowed in good working condition.\n"
-            "• The employee is responsible for proper use, care, and timely return.\n"
-            "• Equipment must be returned clean and in the same condition as issued.\n"
-            "• Any loss, damage, misuse, or missing items may result in liability.\n"
-            "• Equipment must be returned no later than the assigned return date.\n"
-            "• Any issues must be reported immediately to the Depot Clerk.\n"
+            "• Equipment is borrowed in good condition.\n"
+            "• Employee is responsible for proper use and timely return.\n"
+            "• Items must be returned clean and undamaged.\n"
+            "• Loss or damage may result in liability.\n"
+            "• Items must be returned by the assigned date.\n"
+            "• Report any issues to the Depot Clerk immediately."
         )
 
         tk.Label(ack_frame, text=ack_text,
-                 font=("Arial", 14), bg=BG, justify="left").pack(anchor="w")
+                 font=("Arial", 12), bg=BG, justify="left").pack(anchor="w")
 
-        # ---------------- SIGNATURE BLOCKS ----------------
+        # ============================================================
+        # SIGNATURE BLOCKS
+        # ============================================================
         sig_frame = tk.Frame(main, bg=BG)
-        sig_frame.pack(pady=10, fill="x")
+        sig_frame.pack(pady=5, fill="x")
 
-        tk.Label(sig_frame, text="Employee Signature: ___________________________    Date: __________",
-                 font=("Arial", 14), bg=BG).pack(anchor="w", pady=5)
+        tk.Label(sig_frame,
+                 text="Employee Signature: ____________________    Date: ________",
+                 font=("Arial", 12), bg=BG).pack(anchor="w", pady=2)
 
-        tk.Label(sig_frame, text="Clerk Signature:    ___________________________    Date: __________",
-                 font=("Arial", 14), bg=BG).pack(anchor="w", pady=5)
+        tk.Label(sig_frame,
+                 text="Clerk Signature:    ____________________    Date: ________",
+                 font=("Arial", 12), bg=BG).pack(anchor="w", pady=2)
 
-        # ---------------- BUTTONS ----------------
+        # ============================================================
+        # BUTTONS
+        # ============================================================
         btn_frame = tk.Frame(main, bg=BG)
-        btn_frame.pack(pady=20)
+        btn_frame.pack(pady=10)
 
         tk.Button(btn_frame, text="Cancel",
-                  font=("Arial", 16), width=12,
-                  bg=BTN_BG, command=self.cancel).pack(side="left", padx=20)
+                  font=("Arial", 14), width=10,
+                  bg=BTN_BG, command=self.cancel).pack(side="left", padx=10)
 
         tk.Button(btn_frame, text="Save & Print",
-                  font=("Arial", 16), width=15,
-                  bg=BTN_BG, command=self.save_and_print).pack(side="right", padx=20)
+                  font=("Arial", 14), width=12,
+                  bg=BTN_BG, command=self.save_and_print).pack(side="right", padx=10)
 
-    # ---------------- SAVE & PRINT ----------------
+    # ============================================================
+    # SAVE & PRINT
+    # ============================================================
     def save_and_print(self):
-        # Save receipt to file
         save_path = os.path.join(os.path.dirname(__file__), "data", "checkout_receipts")
         os.makedirs(save_path, exist_ok=True)
 
@@ -1198,310 +1245,16 @@ class FinalConfirmationWindow:
             f.write("\nAcknowledgment:\n")
             f.write("Employee agrees to return equipment on time and in good condition.\n")
 
-        # Print (Windows)
         os.startfile(full_path, "print")
-
         messagebox.showinfo("Saved", "Receipt saved and sent to printer.")
 
-    # ---------------- CANCEL ----------------
+    # ============================================================
+    # CANCEL
+    # ============================================================
     def cancel(self):
         for widget in self.root.winfo_children():
             widget.destroy()
         DepotMenu(self.root)
-
-
-
-class ReturnWindow:
-    def __init__(self, root, employee):
-        self.root = root
-        self.employee = employee
-        self.root.configure(bg=BG)
-
-        # ---------------------------------------------------------
-        # HARD‑CODED CHECKOUT RECORDS (SIMULATED ACTIVE CHECKOUTS)
-        # ---------------------------------------------------------
-        self.records = [
-            {
-                "equipment_id": "EQ001",
-                "equipment_name": "Cordless Drill",
-                "borrower_id": "EMPC01",
-                "borrower_name": "John Carter",
-                "quantity": 10,
-                "checkout_date": "2026-06-01",
-                "expected_return": "2026-06-08",
-                "status": "Checked Out",
-                "days_overdue": 0
-            },
-            {
-                "equipment_id": "EQ014",
-                "equipment_name": "Extension Cord 50ft",
-                "borrower_id": "EMPE02",
-                "borrower_name": "Anthony Kim",
-                "quantity": 2,
-                "checkout_date": "2026-05-20",
-                "expected_return": "2026-05-27",
-                "status": "Checked Out",
-                "days_overdue": 0
-            },
-            {
-                "equipment_id": "EQ017",
-                "equipment_name": "Safety Helmet",
-                "borrower_id": "EMPS04",
-                "borrower_name": "Owen Gray",
-                "quantity": 3,
-                "checkout_date": "2026-06-06",
-                "expected_return": "2026-06-13",
-                "status": "Checked Out",
-                "days_overdue": 0
-            }
-        ]
-
-        # For now: show all active records (no filter headaches)
-        self.borrowed_items = [r for r in self.records if r["status"] in ("Checked Out", "Overdue")]
-
-        # Per‑item return data: equipment_id -> {"qty": int, "condition": str}
-        self.return_data = {}
-        for rec in self.borrowed_items:
-            self.return_data[rec["equipment_id"]] = {
-                "qty": rec["quantity"],      # default full return
-                "condition": "Good"          # default condition
-            }
-
-        # ---------------------------------------------------------
-        # UI LAYOUT
-        # ---------------------------------------------------------
-        main = tk.Frame(root, bg=BG)
-        main.place(relx=0.5, rely=0.03, anchor="n")
-
-        build_header(main)
-
-        tk.Label(main,
-                 text="EQUIPMENT RETURN",
-                 font=("Arial", 26, "bold"),
-                 bg=BG, fg=FG).pack(pady=10)
-
-        # ---------------- EMPLOYEE INFO (TOP, SAME AS CHECKOUT) ----------------
-        info = tk.Frame(main, bg=BG)
-        info.pack(pady=5, fill="x")
-
-        full_name = f"{employee['first_name']} {employee['last_name']}"
-        emp_id = employee["employee_id"]
-
-        def row(parent, label, value):
-            r = tk.Frame(parent, bg=BG)
-            r.pack(anchor="w")
-            tk.Label(r, text=f"{label}: ",
-                     font=("Arial", 14, "bold"),
-                     bg=BG, fg=FG).pack(side="left")
-            tk.Label(r, text=value,
-                     font=("Arial", 14),
-                     bg=BG, fg=FG).pack(side="left")
-
-        row(info, "Name", full_name)
-        row(info, "Employee ID", emp_id)
-        if "department" in employee:
-            row(info, "Department", employee["department"])
-        if "status" in employee:
-            row(info, "Status", employee["status"])
-
-        # ---------------- TABLE OF ITEMS ----------------
-        tk.Label(main, text="Items Currently Checked Out",
-                 font=("Arial", 18, "bold"),
-                 bg=BG, fg=FG).pack(anchor="w", padx=10, pady=(10, 0))
-
-        table_frame = tk.Frame(main, bg=BG)
-        table_frame.pack(fill="x")
-
-        self.tree = ttk.Treeview(
-            table_frame,
-            columns=("id", "name", "checkout", "due", "qty_out"),
-            show="headings",
-            height=7
-        )
-
-        self.tree.heading("id", text="ID")
-        self.tree.heading("name", text="Description")
-        self.tree.heading("checkout", text="Borrowed")
-        self.tree.heading("due", text="Due")
-        self.tree.heading("qty_out", text="Qty Out")
-
-        self.tree.column("id", width=80, anchor="center")
-        self.tree.column("name", width=220, anchor="w")
-        self.tree.column("checkout", width=110, anchor="center")
-        self.tree.column("due", width=110, anchor="center")
-        self.tree.column("qty_out", width=80, anchor="center")
-
-        self.tree.pack(side="left", fill="x", expand=True, padx=(10, 0), pady=5)
-
-        scrollbar = ttk.Scrollbar(table_frame, orient="vertical", command=self.tree.yview)
-        self.tree.configure(yscrollcommand=scrollbar.set)
-        scrollbar.pack(side="right", fill="y")
-
-        for rec in self.borrowed_items:
-            self.tree.insert(
-                "",
-                "end",
-                values=(
-                    rec["equipment_id"],
-                    rec["equipment_name"],
-                    rec["checkout_date"],
-                    rec["expected_return"],
-                    rec["quantity"]
-                )
-            )
-
-        if not self.borrowed_items:
-            messagebox.showinfo("No Items", "This employee has no items currently checked out.")
-            self.cancel()
-            return
-
-        # ---------------- RIGHT PANEL: PER‑ITEM RETURN SETTINGS ----------------
-        side = tk.Frame(main, bg=BG)
-        side.pack(fill="x", padx=10, pady=(5, 0))
-
-        tk.Label(side, text="Selected Item Return Details",
-                 font=("Arial", 16, "bold"), bg=BG, fg=FG).grid(row=0, column=0, columnspan=2, sticky="w", pady=(0, 5))
-
-        tk.Label(side, text="Qty Returning:",
-                 font=("Arial", 14, "bold"), bg=BG, fg=FG).grid(row=1, column=0, sticky="w", pady=2)
-        self.qty_var = tk.IntVar(value=1)
-        self.qty_entry = tk.Spinbox(side, from_=0, to=1000,
-                                    textvariable=self.qty_var,
-                                    font=("Arial", 14), width=6)
-        self.qty_entry.grid(row=1, column=1, sticky="w", pady=2, padx=(5, 0))
-
-        tk.Label(side, text="Condition:",
-                 font=("Arial", 14, "bold"), bg=BG, fg=FG).grid(row=2, column=0, sticky="w", pady=2)
-        self.condition_var = tk.StringVar(value="Good")
-        self.condition_menu = ttk.Combobox(side,
-                                           textvariable=self.condition_var,
-                                           values=["Good", "Dirty", "Damaged", "Lost"],
-                                           state="readonly",
-                                           font=("Arial", 12), width=10)
-        self.condition_menu.grid(row=2, column=1, sticky="w", pady=2, padx=(5, 0))
-
-        tk.Button(side, text="Apply to Selected Item",
-                  font=("Arial", 12),
-                  bg=BTN_BG, fg=FG,
-                  command=self.apply_to_selected).grid(row=3, column=0, columnspan=2, pady=5, sticky="w")
-
-        # ---------------- RETURN DATE + NOTES ----------------
-        details = tk.Frame(main, bg=BG)
-        details.pack(pady=10, fill="x")
-
-        tk.Label(details, text="Return Date:",
-                 font=("Arial", 14, "bold"), bg=BG, fg=FG).grid(row=0, column=0, sticky="w", padx=10)
-        self.return_entry = tk.Entry(details, font=("Arial", 14), width=12)
-        self.return_entry.grid(row=0, column=1, padx=5)
-        self.return_entry.insert(0, datetime.now().strftime("%Y-%m-%d"))
-
-        tk.Label(details, text="Overall Notes / Comments:",
-                 font=("Arial", 14, "bold"), bg=BG, fg=FG).grid(row=1, column=0, sticky="nw", padx=10, pady=(5, 0))
-        self.notes_text = tk.Text(details, font=("Arial", 12), width=60, height=3)
-        self.notes_text.grid(row=1, column=1, columnspan=3, padx=5, pady=(5, 0))
-
-        # ---------------- BUTTONS ----------------
-        bottom = tk.Frame(main, bg=BG)
-        bottom.pack(pady=20, fill="x")
-
-        tk.Button(bottom, text="Back",
-                  font=("Arial", 16), width=12,
-                  bg=BTN_BG, fg=FG,
-                  command=self.back).pack(side="left", padx=10)
-
-        tk.Button(bottom, text="Cancel",
-                  font=("Arial", 16), width=12,
-                  bg=BTN_BG, fg=FG,
-                  command=self.cancel).pack(side="left", padx=10)
-
-        tk.Button(bottom, text="Proceed Return",
-                  font=("Arial", 16), width=18,
-                  bg=BTN_BG, fg=FG,
-                  command=self.proceed_return).pack(side="right", padx=10)
-
-    # ---------------- HELPER: APPLY SETTINGS TO SELECTED ROW ----------------
-    def apply_to_selected(self):
-        sel = self.tree.selection()
-        if not sel:
-            messagebox.showerror("No Selection", "Select an item in the table first.")
-            return
-
-        iid = sel[0]
-        values = self.tree.item(iid, "values")
-        eq_id = values[0]
-        qty_out = int(values[4])
-
-        qty_ret = self.qty_var.get()
-        if qty_ret < 0:
-            qty_ret = 0
-        if qty_ret > qty_out:
-            qty_ret = qty_out
-        self.qty_var.set(qty_ret)
-
-        cond = self.condition_var.get()
-
-        self.return_data[eq_id]["qty"] = qty_ret
-        self.return_data[eq_id]["condition"] = cond
-
-        messagebox.showinfo("Applied", f"Set {qty_ret} returned as {cond} for {eq_id}.")
-
-    # ---------------- NAVIGATION ----------------
-    def back(self):
-        for widget in self.root.winfo_children():
-            widget.destroy()
-        # Back to whatever screen called ReturnWindow (usually verification)
-        # If you have a specific class, call it here instead.
-        DepotMenu(self.root)  # adjust if needed
-
-    def cancel(self):
-        for widget in self.root.winfo_children():
-            widget.destroy()
-        DepotMenu(self.root)
-
-    # ---------------- PROCEED: BUILD RECEIPT DATA ----------------
-    def proceed_return(self):
-        return_date_str = self.return_entry.get().strip()
-        notes_overall = self.notes_text.get("1.0", "end").strip()
-
-        try:
-            datetime.strptime(return_date_str, "%Y-%m-%d")
-        except ValueError:
-            messagebox.showerror("Invalid Date", "Return date must be in YYYY-MM-DD format.")
-            return
-
-        returned_items = []
-        remaining_items = []
-
-        for rec in self.borrowed_items:
-            eq_id = rec["equipment_id"]
-            eq_name = rec["equipment_name"]
-            qty_out = rec["quantity"]
-
-            rd = self.return_data.get(eq_id, {"qty": 0, "condition": "Good"})
-            qty_ret = rd["qty"]
-            cond = rd["condition"]
-
-            if qty_ret > 0:
-                returned_items.append(
-                    (eq_id, eq_name, qty_ret, cond)
-                )
-
-            if qty_ret < qty_out:
-                remaining_items.append(
-                    (eq_id, eq_name, qty_out - qty_ret, rec["expected_return"])
-                )
-
-        for widget in self.root.winfo_children():
-            widget.destroy()
-
-        ReturnReceiptWindow(
-            self.root,
-            self.employee,
-            returned_items,
-            remaining_items,
-            return_date_str,
-            notes_overall
-        )
 
 
 class ReturnReceiptWindow:
