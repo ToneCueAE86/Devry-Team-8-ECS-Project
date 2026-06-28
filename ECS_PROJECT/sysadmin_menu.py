@@ -34,8 +34,9 @@ class SysAdminMenu:
                  font=("Arial", 22, "bold"),
                  bg=BG, fg=FG).pack(pady=10)
 
-        # System Admin Menu Buttons
+        # System Admin Menu Buttons - Added "Create User Account" at top Tony Cuevas 6/25
         menu_items = [
+            "Create User Account",
             "Reset User Passwords",
             "Unlock User Accounts",
             "View System Logs",
@@ -48,7 +49,9 @@ class SysAdminMenu:
         # Button height reduced from 2 to 1 to fit screens cleanly Tony Cuevas 6/20
         # Padding lowered from 10 to 6 to stop layout overflow Tony Cuevas 6/20
         for item in menu_items:
-            if item == "Reset User Passwords":
+            if item == "Create User Account":
+                cmd = self.open_create_user_window
+            elif item == "Reset User Passwords":
                 cmd = self.open_reset_password_window
             elif item == "Unlock User Accounts":
                 cmd = self.open_unlock_account_window
@@ -77,6 +80,111 @@ class SysAdminMenu:
                   bg=BTN_BG,
                   fg=FG,
                   command=self.logout).pack(pady=15)
+
+    # Functional Account Creation Pop-up Window - Tony Cuevas 6/25
+    def open_create_user_window(self):
+        # Create a modal pop-up window
+        create_win = tk.Toplevel(self.root)
+        create_win.title("Account Management - Create User")
+        create_win.geometry("480x620")
+        create_win.configure(bg=BG)
+        create_win.resizable(False, False)
+
+        # Lock window focus
+        create_win.grab_set()
+
+        # Window Header
+        tk.Label(create_win, text="CREATE USER ACCOUNT", font=("Arial", 16, "bold"), bg=BG, fg=FG).pack(pady=15)
+
+        # Username Field
+        tk.Label(create_win, text="New Username:", font=("Arial", 12), bg=BG, fg=FG).pack(pady=2)
+        username_entry = tk.Entry(create_win, font=("Arial", 12), width=30)
+        username_entry.pack(pady=5)
+
+        # Password Field
+        tk.Label(create_win, text="Password:", font=("Arial", 12), bg=BG, fg=FG).pack(pady=2)
+        password_entry = tk.Entry(create_win, font=("Arial", 12), width=30, show="*")
+        password_entry.pack(pady=5)
+
+        # Department Field
+        tk.Label(create_win, text="Department (depot, it, maintenance, supply, sysadmin):",
+                 font=("Arial", 11), bg=BG, fg=FG).pack(pady=2)
+        dept_entry = tk.Entry(create_win, font=("Arial", 12), width=30)
+        dept_entry.pack(pady=5)
+
+        # Email Field
+        tk.Label(create_win, text="Email Address:", font=("Arial", 12), bg=BG, fg=FG).pack(pady=2)
+        email_entry = tk.Entry(create_win, font=("Arial", 12), width=30)
+        email_entry.pack(pady=5)
+
+        # Phone Number Field
+        tk.Label(create_win, text="Phone Number (e.g. 555-867-5309):", font=("Arial", 12), bg=BG, fg=FG).pack(pady=2)
+        phone_entry = tk.Entry(create_win, font=("Arial", 12), width=30)
+        phone_entry.pack(pady=5)
+
+        # Equipment Training Level Dropdown
+        tk.Label(create_win, text="Equipment Training Level:", font=("Arial", 12), bg=BG, fg=FG).pack(pady=2)
+        training_options = ["None", "Basic", "Intermediate", "Advanced", "Certified Trainer"]
+        training_var = tk.StringVar(create_win)
+        training_var.set(training_options[0])  # Default to "None"
+        training_menu = tk.OptionMenu(create_win, training_var, *training_options)
+        training_menu.config(font=("Arial", 12), bg=BTN_BG, fg=FG, width=20)
+        training_menu.pack(pady=5)
+
+        # Submit Action Functionality
+        def execute_create():
+            new_user = username_entry.get().strip()
+            new_pass = password_entry.get().strip()
+            dept = dept_entry.get().strip().lower()
+            email = email_entry.get().strip()
+            phone = phone_entry.get().strip()
+            training = training_var.get()
+
+            # Validate all required fields are filled
+            if not new_user or not new_pass or not dept or not email or not phone:
+                messagebox.showerror("Error", "All fields are required.", parent=create_win)
+                return
+
+            # Basic email format check
+            if "@" not in email or "." not in email.split("@")[-1]:
+                messagebox.showerror("Error", "Please enter a valid email address.", parent=create_win)
+                return
+
+            import main
+
+            # Check if username already exists
+            if new_user in main.USERS:
+                messagebox.showerror("Error", f"User '{new_user}' already exists in the system.", parent=create_win)
+                return
+
+            # Update the global USERS dictionary directly in memory
+            main.USERS[new_user] = {
+                "password": new_pass,
+                "department": dept,
+                "email": email,
+                "phone": phone,
+                "training_level": training
+            }
+
+            messagebox.showinfo(
+                "Success",
+                f"Account for '{new_user}' created successfully!\n\n"
+                f"Department: {dept}\n"
+                f"Email: {email}\n"
+                f"Phone: {phone}\n"
+                f"Training Level: {training}",
+                parent=create_win
+            )
+            create_win.destroy()
+
+        # Action Layout Control
+        btn_frame = tk.Frame(create_win, bg=BG)
+        btn_frame.pack(pady=20)
+
+        tk.Button(btn_frame, text="Create Account", font=("Arial", 12, "bold"), bg=BTN_BG, fg=FG, width=15,
+                  command=execute_create).pack(side="left", padx=10)
+        tk.Button(btn_frame, text="Cancel", font=("Arial", 12), bg=BTN_BG, fg=FG, width=10,
+                  command=create_win.destroy).pack(side="right", padx=10)
 
     # Functional Password Reset Pop-up Window
     # Updated by Tony Cuevas 6/20
@@ -140,8 +248,8 @@ class SysAdminMenu:
         search_entry = tk.Entry(unlock_win, font=("Arial", 12), width=30)
         search_entry.pack(pady=5)
 
-        status_label = tk.Label(unlock_win, text="Status: Search for a user first", font=("Arial", 12, "italic"), bg=BG,
-                                fg="gray")
+        status_label = tk.Label(unlock_win, text="Status: Search for a user first", font=("Arial", 12, "italic"),
+                                bg=BG, fg="gray")
         status_label.pack(pady=15)
 
         action_frame = tk.Frame(unlock_win, bg=BG)
@@ -157,10 +265,10 @@ class SysAdminMenu:
             if target_user in main.USERS:
                 is_locked = main.USERS[target_user].get("status", "active") == "locked"
                 if is_locked:
-                    status_label.config(text=f"Status: LOCKED OUT", font=("Arial", 12, "bold"), fg="red")
+                    status_label.config(text="Status: LOCKED OUT", font=("Arial", 12, "bold"), fg="red")
                     unlock_btn.config(state="normal")
                 else:
-                    status_label.config(text=f"Status: ACTIVE (Normal)", font=("Arial", 12, "bold"), fg="green")
+                    status_label.config(text="Status: ACTIVE (Normal)", font=("Arial", 12, "bold"), fg="green")
                     unlock_btn.config(state="disabled")
             else:
                 status_label.config(text="Status: User Not Found", font=("Arial", 12, "italic"), fg="gray")
@@ -213,9 +321,11 @@ class SysAdminMenu:
         list_frame = tk.Frame(main_frame, bg=BG)
         list_frame.pack(side="left", fill="y", padx=(0, 10))
 
-        tk.Label(list_frame, text="Select Log File:", font=("Arial", 11, "bold"), bg=BG, fg=FG).pack(anchor="w", pady=2)
+        tk.Label(list_frame, text="Select Log File:", font=("Arial", 11, "bold"), bg=BG, fg=FG).pack(anchor="w",
+                                                                                                      pady=2)
 
-        file_listbox = tk.Listbox(list_frame, font=("Arial", 10), width=22, selectmode="single", exportselection=False)
+        file_listbox = tk.Listbox(list_frame, font=("Arial", 10), width=22, selectmode="single",
+                                  exportselection=False)
         file_listbox.pack(fill="both", expand=True)
 
         for file_name in mock_logs.keys():
@@ -225,7 +335,7 @@ class SysAdminMenu:
         text_frame.pack(side="right", fill="both", expand=True)
 
         tk.Label(text_frame, text="Log File Contents:", font=("Arial", 11, "bold"), bg=BG, fg=FG).pack(anchor="w",
-                                                                                                       pady=2)
+                                                                                                        pady=2)
 
         scrollbar = tk.Scrollbar(text_frame)
         scrollbar.pack(side="right", fill="y")
@@ -235,8 +345,7 @@ class SysAdminMenu:
         log_display.pack(fill="both", expand=True)
         scrollbar.config(command=log_display.yview)
 
-        log_display.insert("1.0",
-                           "Please select a log file from the left sidebar panel to preview system status events.")
+        log_display.insert("1.0", "Please select a log file from the left sidebar panel to preview system status events.")
         log_display.config(state="disabled")
 
         def on_file_select(event):
